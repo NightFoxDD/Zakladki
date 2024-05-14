@@ -1,0 +1,49 @@
+﻿<Window x:Class="Zakladki.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Zakladki"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="400">
+    <Window.Resources>
+        <Style TargetType="Frame" x:Key="Frame_AddBtn">
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <Frame Style="{DynamicResource Frame_AddBtn}" HorizontalAlignment="Center" >
+                <Frame.Content>
+                    <Button Content="Dodaj Książkę" Padding="10" FontSize="15" Background="Transparent" BorderThickness="0" Click="Btn_AddBookWindow_Click"/>
+                </Frame.Content>
+            </Frame>
+           
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <ListView x:Name="LV_Books">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <StackPanel Background="Blue">
+                                <TextBlock Text="{Binding Name}"/>
+                                <TextBlock Text="{Binding Author}"/>
+                                <TextBlock Text="{Binding Description}"/>
+                                <Button Content="Usuń" CommandParameter="{Binding .}" Click="Btn_DeleteBook_Click"/>
+                                <Button Content="BookMarks" CommandParameter="{Binding .}" Click="Btn_AddBookMark_Click"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</Window>
