@@ -24,6 +24,7 @@ namespace Zakladki.Class
             Author = author;
             PublicatedTime = publicatedTime;
         }
+        public Book() { }
         public int ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

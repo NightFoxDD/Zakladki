@@ -20,13 +20,29 @@ namespace Zakladki.Windows
     /// </summary>
     public partial class AddBookMarks : Window
     {
-        public AddBookMarks()
+        Book book;
+        public AddBookMarks(Book book)
         {
             InitializeComponent();
+            this.book = book;
+            LV_BookMarks.ItemsSource = FileFunctions.getRefreshedBook(book).BookMarks;
         }
         private void Btn_DeleteBookMark_Click(object sender, RoutedEventArgs e)
         {
-           
+            Button? button = (Button)sender;
+            if (button == null) return;
+            BookMark bookMark = (BookMark)button.CommandParameter;
+            if (bookMark == null) return;
+            FileFunctions.RemoveBookMark(book, bookMark);
+            book = FileFunctions.getRefreshedBook(book);
+        }
+        private void Btn_AddBookMark_Click(object sender, RoutedEventArgs e)
+        {
+            BookMark bookMark = new BookMark(int.Parse(TB_Page.Text), TB_Description.Text);
+            FileFunctions.AddBookMark(book, bookMark);
+            book = FileFunctions.getRefreshedBook(book);
+            LV_BookMarks.ItemsSource = FileFunctions.getRefreshedBook(book).BookMarks;
+
 
         }
     }

@@ -14,11 +14,12 @@
         <StackPanel>
             <Label Content="Dodaj książkę"/>
             <Label Content="Opis BookMarka:"/>
-            <TextBox x:Name="TB_Name"/>
+            <TextBox x:Name="TB_Description"/>
             <Label Content="Strona BookMarka:"/>
             <TextBox x:Name="TB_Page"/>
+            <Button Content="AddBookMark" Click="Btn_AddBookMark_Click"/>
         </StackPanel>
-        <ListView Grid.Row="1">
+        <ListView Grid.Row="1" x:Name="LV_BookMarks">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>

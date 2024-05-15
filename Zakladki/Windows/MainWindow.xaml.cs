@@ -43,9 +43,10 @@ namespace Zakladki
         {
             Button? button = sender as Button;
             if (button == null) return;
-            Book? delBook = (button).CommandParameter as Book;
-            if (delBook == null) return;
-            
+            Book? book = (button).CommandParameter as Book;
+            if (book == null) return;
+            (new AddBookMarks(book)).ShowDialog();
+            LV_Books.ItemsSource = FileFunctions.getBooks();
         }
     }
 }

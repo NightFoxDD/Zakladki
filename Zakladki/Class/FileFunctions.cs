@@ -25,11 +25,12 @@ namespace Zakladki.Class
             foreach (string line in readText)
             {
                 List<BookMark> bookMarks = new List<BookMark>();
-                
-                if (line.Split(';')[5].Length>0)
+                string marks = line.Split(';')[5];
+                if (marks.Length>0)
                 {
-                    foreach (var item in line.Split(';')[5].Split('/'))
+                    foreach (var item in marks.Split('/'))
                     {
+                        if (item.Length > 0) { break; }
                         bookMarks.Add(new BookMark(int.Parse(item.Split(',')[0]), int.Parse(item.Split(',')[1]), item.Split(',')[2]));
                     }
                 }
@@ -38,6 +39,18 @@ namespace Zakladki.Class
                 books.Add(readedBook);
             }
             return books;
+        }
+        public static Book getRefreshedBook(Book book)
+        {
+            List<Book> books = getBooks();
+            foreach (Book item in books)
+            {
+                if(item.ID == book.ID)
+                {
+                    return item;
+                }
+            }
+            return new Book();
         }
         public static void saveBooks(List<Book> books)
         {
@@ -84,6 +97,48 @@ namespace Zakladki.Class
                 }
             }
             saveBooks(books);
+        }
+        public static void AddBookMark(Book book, BookMark bookMark)
+        {
+            List<Book> books = getBooks();  
+            foreach (Book item in books)
+            {
+                if (book.ID == item.ID)
+                {
+                    if (item.BookMarks.Count > 0)
+                    {
+                        bookMark.ID = item.BookMarks.Last().ID + 1;
+                    }
+                    else
+                    {
+                        bookMark.ID = 0;
+                    }
+                    item.BookMarks.Add(bookMark);
+                    saveBooks(books);
+                    break;
+                }
+            }
+        }
+        public static void RemoveBookMark(Book book, BookMark bookMark)
+        {
+            List<Book> books = getBooks();
+            foreach (Book item in books)
+            {
+                if (book.ID == item.ID)
+                {
+                    foreach (BookMark mark in item.BookMarks)
+                    {
+                        if(mark.ID == bookMark.ID)
+                        {
+                            item.BookMarks.Remove(mark);
+                            saveBooks(books);
+                            break;
+                        }
+                        
+                    }
+                   
+                }
+            }
         }
     }
 }
