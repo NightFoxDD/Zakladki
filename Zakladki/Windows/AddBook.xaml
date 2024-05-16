@@ -5,23 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zakladki.Windows"
         mc:Ignorable="d"
-        Title="AddBook" Height="450" Width="400">
+        Title="AddBook" Height="500" Width="400">
+    <Window.Resources>
+        <Style TargetType="Label" x:Key="Title">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="TextBox" x:Key="Entry">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Margin" Value="15,0,15,0"/>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel>
-            <Label Content="Dodaj książkę"/>
-            <Label Content="Nazwa książki:"/>
-            <TextBox x:Name="TB_Name"/>
-            <Label Content="Opis książki:"/>
-            <TextBox x:Name="TB_Description"/>
-            <Label Content="Autor:"/>
-            <TextBox x:Name="TB_Author"/>
-            <Label Content="Data wydania:"/>
-            <DatePicker x:Name="DP_PublicatedTime"/>
+            <Label Grid.Row="0" Content="Dodaj książkę" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="30" FontSize="20" FontWeight="Bold"/>
+        <StackPanel Grid.Row="1">
+
+            <Label Content="Nazwa książki:" Style="{DynamicResource Title}"/>
+            <TextBox x:Name="TB_Name" Style="{DynamicResource Entry}"/>
+            <Label Content="Opis książki:" Style="{DynamicResource Title}"/>
+            <TextBox x:Name="TB_Description" Style="{DynamicResource Entry}"/>
+            <Label Content="Autor:" Style="{DynamicResource Title}"/>
+            <TextBox x:Name="TB_Author" Style="{DynamicResource Entry}"/>
+            <Label Content="Data wydania:" Style="{DynamicResource Title}"/>
+            <DatePicker x:Name="DP_PublicatedTime" Margin="15,0,15,0"/>
         </StackPanel>
-        <Button Content="Dodaj" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Click="Btn_AddBook_Click"/>
+        <Button Content="Dodaj" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Stretch" Click="Btn_AddBook_Click" Margin="135,0,135,0" Padding="0,15,0,15" Background="White"/>
     </Grid>
 </Window>

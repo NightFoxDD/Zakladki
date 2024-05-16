@@ -20,30 +20,40 @@ namespace Zakladki.Windows
     /// </summary>
     public partial class AddBookMarks : Window
     {
-        Book book;
-        public AddBookMarks(Book book)
+        Tables.Book book;
+        public AddBookMarks(Tables.Book book)
         {
             InitializeComponent();
             this.book = book;
-            LV_BookMarks.ItemsSource = FileFunctions.getRefreshedBook(book).BookMarks;
+            Refresh();
+        }
+        public async void Refresh()
+        {
+            //LV_BookMarks.ItemsSource = FileFunctions.getRefreshedBook(book).BookMarks;
+            //LV_BookMarks.ItemsSource = JsonFunctions.getRefreshedBook(book).BookMarks;
+            LV_BookMarks.ItemsSource = await App.DataAccess.getBookMark(book);
         }
         private void Btn_DeleteBookMark_Click(object sender, RoutedEventArgs e)
         {
             Button? button = (Button)sender;
             if (button == null) return;
-            BookMark bookMark = (BookMark)button.CommandParameter;
+            Tables.BookMark bookMark = (Tables.BookMark)button.CommandParameter;
             if (bookMark == null) return;
-            FileFunctions.RemoveBookMark(book, bookMark);
-            book = FileFunctions.getRefreshedBook(book);
+            //FileFunctions.RemoveBookMark(book, bookMark);
+            //JsonFunctions.RemoveBookMark(book, bookMark);
+            App.DataAccess.removeBookMark(bookMark);
+            Refresh();
         }
         private void Btn_AddBookMark_Click(object sender, RoutedEventArgs e)
         {
-            BookMark bookMark = new BookMark(int.Parse(TB_Page.Text), TB_Description.Text);
-            FileFunctions.AddBookMark(book, bookMark);
-            book = FileFunctions.getRefreshedBook(book);
-            LV_BookMarks.ItemsSource = FileFunctions.getRefreshedBook(book).BookMarks;
-
-
+            Tables.BookMark bookMark = new Tables.BookMark();
+            bookMark.Page = int.Parse(TB_Page.Text);
+            bookMark.Description = TB_Description.Text;
+            //FileFunctions.AddBookMark(book, bookMark);
+            //JsonFunctions.AddBookMark(book, bookMark);
+            if (App.Database == null) return;
+            App.Database.addBookMark(book, bookMark);
+            Refresh();
         }
     }
 }

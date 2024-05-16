@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,7 @@ namespace Zakladki.Class
             PublicatedTime = publicatedTime;
         }
         public Book() { }
+
         public int ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

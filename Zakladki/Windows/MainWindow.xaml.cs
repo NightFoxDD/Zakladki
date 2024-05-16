@@ -21,32 +21,40 @@ namespace Zakladki
         public MainWindow()
         {
             InitializeComponent();
-            LV_Books.ItemsSource = FileFunctions.getBooks();
+            Refresh();
+        }
+        public async void Refresh()
+        {
+            //LV_Books.ItemsSource = FileFunctions.getBooks();
+            //LV_Books.ItemsSource = JsonFunctions.getBooks();
+            LV_Books.ItemsSource = await App.DataAccess.getBooks();
         }
         
         private void Btn_AddBookWindow_Click(object sender, RoutedEventArgs e)
         {
             (new AddBook()).ShowDialog();
-            LV_Books.ItemsSource = FileFunctions.getBooks();
+            Refresh();
         }
 
         private void Btn_DeleteBook_Click(object sender, RoutedEventArgs e)
         {
             Button? button = sender as Button;
             if (button == null) return;
-            Book? delBook = (button).CommandParameter as Book;
+            Tables.Book? delBook = (button).CommandParameter as Tables.Book;
             if(delBook == null) return;
-            FileFunctions.deleteBook(delBook);
-            LV_Books.ItemsSource = FileFunctions.getBooks();
+            //FileFunctions.deleteBook(delBook);
+            //JsonFunctions.deleteBook(delBook);
+            App.DataAccess.deleteBook(delBook);
+            Refresh();
         }
         private void Btn_AddBookMark_Click(object sender, RoutedEventArgs e)
         {
             Button? button = sender as Button;
             if (button == null) return;
-            Book? book = (button).CommandParameter as Book;
+            Tables.Book? book = (button).CommandParameter as Tables.Book;
             if (book == null) return;
             (new AddBookMarks(book)).ShowDialog();
-            LV_Books.ItemsSource = FileFunctions.getBooks();
+            Refresh();
         }
     }
 }

@@ -27,7 +27,15 @@ namespace Zakladki.Windows
 
         private void Btn_AddBook_Click(object sender, RoutedEventArgs e)
         {
-            FileFunctions.add(new Book(TB_Name.Text,TB_Description.Text,TB_Author.Text, DP_PublicatedTime.SelectedDate));
+            //FileFunctions.add(new Book(TB_Name.Text,TB_Description.Text,TB_Author.Text, DP_PublicatedTime.SelectedDate));
+            //JsonFunctions.add(new Book(TB_Name.Text,TB_Description.Text,TB_Author.Text, DP_PublicatedTime.SelectedDate));
+            Tables.Book book = new Tables.Book();
+            book.Name = TB_Name.Text;
+            book.Description = TB_Description.Text;
+            book.Author = TB_Author.Text;
+            book.PublicatedTime = DP_PublicatedTime.SelectedDate;
+
+            App.DataAccess.addBook(book);
             this.Close();
         }
     }

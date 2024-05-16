@@ -12,10 +12,22 @@ namespace Zakladki
     /// </summary>
     public partial class App : Application
     {
+        public static DatabaseFunctions? Database;
+        public static DatabaseFunctions DataAccess
+        {
+            get
+            {
+                if (Database == null)
+                {
+                    Database = new DatabaseFunctions(Path.Combine(Directory.GetCurrentDirectory(), "AdvertisementSystem_WPF.db3"));
+                }
+                return Database;
+            }
+        }
         public App()
         {
-            FileFunctions.createPath();
-            //JsonFunctions.createPath();
+            //FileFunctions.createPath();
+            JsonFunctions.createPath();
         }
     }
 

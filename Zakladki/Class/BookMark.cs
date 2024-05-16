@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,7 @@ namespace Zakladki.Class
             Page = page;
             Description = description;
         }
+        public BookMark() { }
 
         public int ID { get; set; }
         public int Page { get; set; }

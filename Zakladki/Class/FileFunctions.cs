@@ -30,8 +30,9 @@ namespace Zakladki.Class
                 {
                     foreach (var item in marks.Split('/'))
                     {
-                        if (item.Length > 0) { break; }
-                        bookMarks.Add(new BookMark(int.Parse(item.Split(',')[0]), int.Parse(item.Split(',')[1]), item.Split(',')[2]));
+                        if (item.Length <= 0) { break; }
+                        string[] mark = item.Split(',');
+                        bookMarks.Add(new BookMark(int.Parse(mark[0]), int.Parse(mark[1]), mark[2]));
                     }
                 }
                 
