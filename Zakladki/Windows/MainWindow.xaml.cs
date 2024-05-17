@@ -25,8 +25,13 @@ namespace Zakladki
         }
         public async void Refresh()
         {
+            // PLIKI //
             //LV_Books.ItemsSource = FileFunctions.getBooks();
+
+            // JSON //
             //LV_Books.ItemsSource = JsonFunctions.getBooks();
+
+            // BAZA //
             LV_Books.ItemsSource = await App.DataAccess.getBooks();
         }
         
@@ -42,8 +47,14 @@ namespace Zakladki
             if (button == null) return;
             Tables.Book? delBook = (button).CommandParameter as Tables.Book;
             if(delBook == null) return;
+
+            // PLIKI //
             //FileFunctions.deleteBook(delBook);
+
+            // JSON //
             //JsonFunctions.deleteBook(delBook);
+
+            // BAZA //
             App.DataAccess.deleteBook(delBook);
             Refresh();
         }
@@ -51,6 +62,11 @@ namespace Zakladki
         {
             Button? button = sender as Button;
             if (button == null) return;
+            
+            // PLIKI/JSON //
+            //Book? book = (button).CommandParameter as Book;
+
+            // BAZA //
             Tables.Book? book = (button).CommandParameter as Tables.Book;
             if (book == null) return;
             (new AddBookMarks(book)).ShowDialog();

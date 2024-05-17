@@ -27,7 +27,7 @@
             <TextBox x:Name="TB_Description" Style="{DynamicResource Entry}"/>
             <Label Content="Strona BookMarka:" Style="{DynamicResource Title}"/>
             <TextBox x:Name="TB_Page" Style="{DynamicResource Entry}"/>
-            <Button Content="AddBookMark" Click="Btn_AddBookMark_Click" HorizontalAlignment="Center" Padding="30,10,30,10" Background="White" Margin="20"/>
+            <Button Content="AddBookMark" Click="Btn_AddBookMark_Click" HorizontalAlignment="Center" Padding="30,10,30,10" Background="Green" Margin="20"/>
         </StackPanel>
         <ListView Grid.Row="1" x:Name="LV_BookMarks">
             <ListView.ItemTemplate>
@@ -42,7 +42,7 @@
                                 <Label Content="Opis:"/>
                                 <TextBlock Text="{Binding Description}" VerticalAlignment="Center"/>
                             </StackPanel>
-                            <Button Content="Usuń" Background="White" CommandParameter="{Binding .}" Click="Btn_DeleteBookMark_Click"/>
+                            <Button Content="Usuń" Background="Red" CommandParameter="{Binding .}" Click="Btn_DeleteBookMark_Click"/>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>

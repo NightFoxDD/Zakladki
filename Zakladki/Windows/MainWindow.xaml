@@ -22,7 +22,7 @@
         <StackPanel>
             <Frame Style="{DynamicResource Frame_AddBtn}" HorizontalAlignment="Center" >
                 <Frame.Content>
-                    <Button Content="Dodaj Książkę" Padding="10" FontSize="15" Background="Transparent" BorderThickness="0" Click="Btn_AddBookWindow_Click"/>
+                    <Button Content="Dodaj Książkę" Padding="10" FontSize="15" Background="Green" BorderThickness="0" Click="Btn_AddBookWindow_Click"/>
                 </Frame.Content>
             </Frame>
            
@@ -56,8 +56,8 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Button Content="Usuń" Background="White" Padding="10" CommandParameter="{Binding .}" Click="Btn_DeleteBook_Click"/>
-                                    <Button Grid.Column="1" Content="BookMarks" Background="White" Padding="10" CommandParameter="{Binding .}" Click="Btn_AddBookMark_Click"/>
+                                    <Button Content="Usuń" Background="Red" Padding="10" CommandParameter="{Binding .}" Click="Btn_DeleteBook_Click"/>
+                                    <Button Grid.Column="1" Content="BookMarks" Background="CadetBlue" Padding="10" CommandParameter="{Binding .}" Click="Btn_AddBookMark_Click"/>
                                 </Grid>
                                 
                             </Grid>

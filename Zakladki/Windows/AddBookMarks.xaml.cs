@@ -29,8 +29,13 @@ namespace Zakladki.Windows
         }
         public async void Refresh()
         {
+            // PLIK //
             //LV_BookMarks.ItemsSource = FileFunctions.getRefreshedBook(book).BookMarks;
+
+            // JSON //
             //LV_BookMarks.ItemsSource = JsonFunctions.getRefreshedBook(book).BookMarks;
+
+            // BAZA //
             LV_BookMarks.ItemsSource = await App.DataAccess.getBookMark(book);
         }
         private void Btn_DeleteBookMark_Click(object sender, RoutedEventArgs e)
@@ -39,18 +44,30 @@ namespace Zakladki.Windows
             if (button == null) return;
             Tables.BookMark bookMark = (Tables.BookMark)button.CommandParameter;
             if (bookMark == null) return;
+
+            // PLIK //
             //FileFunctions.RemoveBookMark(book, bookMark);
+
+            // JSON //
             //JsonFunctions.RemoveBookMark(book, bookMark);
+
+            // BAZA //
             App.DataAccess.removeBookMark(bookMark);
             Refresh();
         }
         private void Btn_AddBookMark_Click(object sender, RoutedEventArgs e)
         {
+            
             Tables.BookMark bookMark = new Tables.BookMark();
             bookMark.Page = int.Parse(TB_Page.Text);
             bookMark.Description = TB_Description.Text;
+            // PLIK //
             //FileFunctions.AddBookMark(book, bookMark);
+
+            // JSON //
             //JsonFunctions.AddBookMark(book, bookMark);
+
+            // BAZA //
             if (App.Database == null) return;
             App.Database.addBookMark(book, bookMark);
             Refresh();
